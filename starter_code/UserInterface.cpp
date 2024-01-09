@@ -93,6 +93,7 @@ int displayMenu()
 	//		When you read about I/O in Chapter 13, you will learn how to
 	//		protect against bad input.
 
+    log("entered");
     int selection;
 
     cout << endl;
@@ -104,15 +105,20 @@ int displayMenu()
     cout << "4) List all employees" << endl;
     cout << "5) List all current employees" << endl;
     cout << "6) List all former employees" << endl;
+    cout << "7) Generate new database" << endl;
+    cout << "8) Save database to file" << endl;
+    cout << "9) Load database from file" << endl;
+    cout << "10) Edit employee" << endl;
+    cout << "11) Search employee" << endl;
     cout << "0) Quit" << endl;
     cout << endl;
     cout << "---> ";
     
 	cin >> selection;
-    
-	return selection;
-}
 
+	return selection;
+    log("exited");
+}
 void doHire(Database& db)
 {
     string firstName;
