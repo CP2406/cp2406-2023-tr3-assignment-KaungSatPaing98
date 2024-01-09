@@ -352,3 +352,4 @@ Database loadDBfromFile() {
     log("exited");
     return dbNew;
 }
+
