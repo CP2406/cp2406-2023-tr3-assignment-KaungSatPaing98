@@ -304,3 +304,51 @@ const string checkFileName() {
     log("exited");
     return filename;
 }
+
+
+// Load database from file
+Database loadDBfromFile() {
+    log("entered");
+    Database dbNew;
+    string filename;
+    string ext {".txt"};
+    cout << "Enter a filename: ";
+    cin >> filename;
+    filename+=ext;
+
+    ifstream inputFile{ filename.data() };
+	if (inputFile.fail())
+    {
+		throw invalid_argument{ "Unable to open file" };
+    }
+    
+    while (!inputFile.eof())
+    {
+        string line;
+		getline(inputFile, line);
+        
+        // Skip empty lines if found
+		if (line.empty()) {
+			continue;
+		}
+		
+        // Make a string stream and parse it.
+		istringstream inLine { line };
+		string firstName, middleName, lastName, address, isHired, empNumber, salary;
+        
+        // Names in the file are quoted so quoted() is needed to separate them
+        inLine >> quoted(firstName) >> quoted(middleName) >> quoted(lastName)
+               >> quoted(address) >> quoted(isHired) >> quoted(empNumber) >> quoted(salary);
+		if (inLine.bad()) {
+			cerr << "Error reading person. Ignoring." << endl;
+			continue;
+		}
+        
+        // Load into the new database
+        dbNew.loadEmployee(firstName, middleName, lastName, address,
+                          isHired, empNumber, salary);
+    }
+    
+    log("exited");
+    return dbNew;
+}
