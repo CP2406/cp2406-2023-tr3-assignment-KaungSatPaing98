@@ -244,3 +244,63 @@ Database generateNewDB(Database& db)
     // Return the new Database with 8000 employees 
     return dbNew;
 }
+
+// Check and return filename to be used
+const string checkFileName() {
+    log("entered");
+    int selection;
+    string filename;
+    string ext {".txt"};
+    cout << "Enter a filename: ";
+    cin >> filename;
+    filename+=ext;
+
+    // Iterate through current directory to see if file exists
+    filesystem::directory_iterator begin("."), end;
+    for (auto iter = begin; iter != end; ++iter)
+
+    // If it is not a directory
+    if (iter->is_regular_file())
+    {
+        string entry {iter->path().filename().string()};
+        string entryStem {iter->path().stem().string()};
+
+        // Check full filename with extension and file stem
+        if (filename == entry || filename == entryStem)
+        {
+            cout << "File: " << iter->path().filename() << " already exists." << endl;
+            
+            // Get user input
+            cout << "Select from the following options:" << endl;
+            cout << "1) Overwrite this file" << endl;
+            cout << "2) Create new file" << endl;
+            cout << endl;
+            cout << "---> ";
+            cin >> selection;
+
+            switch (selection)
+                {
+                    case 1:
+                        cout << "Database successfully saved to file." << endl;
+                        return filename;
+                        break;
+                    case 2:
+                        cout << "Enter a filename: ";
+                        cin >> filename;
+                        filename+=ext;
+                        cout << "Database successfully saved to file." << endl;
+                        return filename;
+                        break;
+                    default:
+                        cerr << "Unknown command" << endl;
+                        break;
+                }
+        }
+    }
+    
+    // If the file did not exist, create and write to it
+    cout << "Database successfully saved to file." << endl;
+    
+    log("exited");
+    return filename;
+}
