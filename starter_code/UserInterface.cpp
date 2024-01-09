@@ -119,21 +119,31 @@ int displayMenu()
 	return selection;
     log("exited");
 }
+
 void doHire(Database& db)
 {
+    log("entered");
     string firstName;
+    string middleName;
     string lastName;
+    string address;
 
     cout << "First name? ";
     cin >> firstName;
+    cout << "Middle name? ";
+    cin >> middleName;
     cout << "Last name? ";
     cin >> lastName;
-    
-    db.addEmployee(firstName, lastName);
+    cout << "Address? ";
+    getline(cin >> ws, address);  // Ignores ws within cin input
+
+    db.addEmployee(firstName, middleName, lastName, address);
+    log("exited"); 
 }
 
 void doFire(Database& db)
 {
+    log("entered");
     int employeeNumber;
 
     cout << "Employee number? ";
@@ -146,10 +156,13 @@ void doFire(Database& db)
     } catch (const std::logic_error& exception) {
         cerr << "Unable to terminate employee: " << exception.what() << endl;
     }
+
+    log("exited");
 }
 
 void doPromote(Database& db)
 {
+    log("entered");
     int employeeNumber;
     int raiseAmount;
 
@@ -164,4 +177,7 @@ void doPromote(Database& db)
     } catch (const std::logic_error& exception) {
         cerr << "Unable to promote employee: " << exception.what() << endl;
     }
+
+    log("exited");
 }
+
