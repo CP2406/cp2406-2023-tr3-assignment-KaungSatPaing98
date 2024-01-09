@@ -1,5 +1,11 @@
+// CP2406 Assignment - trimester 3 2023 - Kaung Sat Paing - 14399033
 #include <iostream>
 #include <stdexcept>
+#include <fstream>
+#include <sstream>
+#include <string>
+#include <iomanip>
+#include <filesystem>
 #include "Database.h"
 
 using namespace std;
@@ -12,6 +18,25 @@ namespace Records {
 		Employee theEmployee(firstName, lastName);
 		theEmployee.setEmployeeNumber(mNextEmployeeNumber++);
 		theEmployee.hire();
+		mEmployees.push_back(theEmployee);
+
+		return mEmployees[mEmployees.size() - 1];
+	}
+
+    Employee& Database::loadEmployee(const string& firstName,
+		const string& middleName, const string& lastName, const string& address,
+		const string& isHired, const string& empNumber, const string& salary)
+	{
+		Employee theEmployee(firstName, middleName, lastName, address);
+		if (isHired == "Current Employee") {
+			theEmployee.hire();
+		} else {
+			theEmployee.fire();
+		}
+		int empNumberInt = stoi(empNumber);
+		int salaryInt = stoi(salary);
+		theEmployee.setEmployeeNumber(empNumberInt);
+		theEmployee.setSalary(salaryInt);
 		mEmployees.push_back(theEmployee);
 
 		return mEmployees[mEmployees.size() - 1];
