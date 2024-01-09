@@ -19,15 +19,24 @@ int displayMenu();
 void doHire(Database& db);
 void doFire(Database& db);
 void doPromote(Database& db);
-void doDemote(Database& db);
+void doDemote(Database& db); // No criteria for use of this function in the assignemnt
+Database generateNewDB(Database& db);
+Database loadDBfromFile();
+const string checkFileName();
+void editEmployee(Database& db);
+void searchEmployee(Database& db);
 
 int main()
 {
-	Database employeeDB;
+    log("entered"); // Enable or disable debugging in Debugger.h
+    Database employeeDB;
+    string dbFileName;
 
 	bool done = false;
 	while (!done) {
-		int selection = displayMenu();
+
+        int selection = displayMenu();
+
 		switch (selection) {
 		case 0:
 			done = true;
@@ -50,12 +59,29 @@ int main()
 		case 6:
 			employeeDB.displayFormer();
 			break;
+        case 7:
+            employeeDB = generateNewDB(employeeDB);
+            break;
+        case 8:
+            dbFileName = checkFileName();
+            employeeDB.saveDBtoFile(dbFileName);
+            break;
+        case 9:
+            employeeDB = loadDBfromFile();
+            break;
+        case 10:
+            editEmployee(employeeDB);
+            break;
+        case 11:
+            searchEmployee(employeeDB);
+            break;
 		default:
 			cerr << "Unknown command." << endl;
 			break;
 		}
 	}
-
+    
+    log("exited");
 	return 0;
 }
 
