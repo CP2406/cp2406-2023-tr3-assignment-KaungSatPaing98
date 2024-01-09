@@ -415,3 +415,32 @@ void editEmployee(Database& db)
     
     log("exited");
 }
+
+// Search employee
+void searchEmployee(Database& db)
+{
+    log("entered");
+    int selection;
+    string searchTerm;
+    
+    cout << "Select from the following search options" << endl;
+    cout << "1) Search by first name" << endl;
+    cout << "2) Search by middle name" << endl;
+    cout << "3) Search by last name" << endl;
+    cout << "4) Search by address" << endl;
+    cout << endl;
+    cout << "---> ";
+    cin >> selection;
+    cout << endl;
+    cout << "Enter the name, address or fragment to search for: ";
+    cin >> searchTerm;
+
+    // Parse selection and search term to the method
+    try {
+        db.searchEmployee(selection, searchTerm);
+    } catch (const std::logic_error& exception) {
+        cerr << "Unable to search employee: " << exception.what() << endl;
+    }
+    
+    log("exited");  
+}
