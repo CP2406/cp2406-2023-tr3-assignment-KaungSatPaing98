@@ -118,3 +118,57 @@ void Database::clearDatabase()
 					<< quoted(salaryNumString) << endl;
 			}
 	}
+
+// Search employee
+	void Database::searchEmployee(const int searchType, const string& searchTerm) const
+	{
+		string firstName, middleName, lastName, address;
+		
+		switch(searchType)
+		{
+			case 1:
+				for (auto& employee : mEmployees) {
+					firstName = employee.getFirstName();
+					size_t found = firstName.find(searchTerm);
+            		if (found!=std::string::npos)
+						{
+							employee.display();
+						}
+				}	
+				break;
+			case 2:
+				for (auto& employee : mEmployees) {
+					middleName = employee.getMiddleName();
+					size_t found = middleName.find(searchTerm);
+            		if (found!=std::string::npos)
+						{
+							employee.display();
+						}
+				}	
+				break;
+			case 3:
+				for (auto& employee : mEmployees) {
+					lastName = employee.getLastName();
+					size_t found = lastName.find(searchTerm);
+            		if (found!=std::string::npos)
+						{
+							employee.display();
+						}
+				}	
+				break;
+			case 4:
+				for (auto& employee : mEmployees) {
+					address = employee.getAddress();
+					size_t found = address.find(searchTerm);
+            		if (found!=std::string::npos)
+						{
+							employee.display();
+						}
+				}	
+				break;
+			default:
+				std::cerr << "Unknown command" << std::endl;
+				break;
+		}
+	}
+}
