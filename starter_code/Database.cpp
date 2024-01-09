@@ -88,4 +88,33 @@ namespace Records {
 
 }
 
-// test commit
+// to clear the database
+void Database::clearDatabase()
+	{
+		mEmployees.clear();
+	}
+
+	// Save database to file
+	void Database::saveDBtoFile(string filename) const
+	{
+
+		ofstream outFile{ filename, ios_base::trunc };
+		if (!outFile.good())
+			{
+			cerr << "Cannot open file: " << filename << endl;
+			return;
+			}
+		for (auto& employee : mEmployees)
+			{
+			// Save each employee to a line in a file with simple quoted format to include whitespace
+			string employeeStatus = (employee.isHired() ? "Current Employee" : "Former Employee");
+			int empNum = (employee.getEmployeeNumber());
+			string empNumString = to_string(empNum);
+			int salaryNum = (employee.getSalary());
+			string salaryNumString = to_string(salaryNum);
+			outFile << quoted(employee.getFirstName()) << quoted(employee.getMiddleName())
+					<< quoted(employee.getLastName()) << quoted(employee.getAddress())
+					<< quoted(employeeStatus) << quoted(empNumString)
+					<< quoted(salaryNumString) << endl;
+			}
+	}
