@@ -353,3 +353,65 @@ Database loadDBfromFile() {
     return dbNew;
 }
 
+// Edit employee
+void editEmployee(Database& db)
+{
+    log("entered");
+    int employeeNumber, selection, newSalary;
+    string newAddress, newStatus;
+
+    // Search by employee number required
+    // Use option 11) search by name first if needing to find employee number
+    cout << "Employee number? ";
+    cin >> employeeNumber;
+
+    cout << "Select from the following options" << endl;
+    cout << "1) Edit employee address" << endl;
+    cout << "2) Edit employee salary" << endl;
+    cout << "3) Edit employment status" << endl;
+    cout << endl;
+    cout << "---> ";
+    cin >> selection;
+
+    try {
+        Employee& emp = db.getEmployee(employeeNumber);
+        cout << "Current employee record: " << endl;
+        emp.display();
+
+        switch (selection)
+            {
+                case 1:
+                    cout << "Enter the new address: ";
+                    getline(cin >> ws, newAddress);  // Ignores ws within cin input
+                    emp.setAddress(newAddress);
+                    cout << "Updated address in employee record: " << endl;
+                    emp.display();
+                    break;
+                case 2:
+                    cout << "Enter new salary: ";
+                    cin >> newSalary;
+                    emp.promote(newSalary); // Use existing method to update new salary
+                    cout << "Updated salary in employee record: " << endl;
+                    emp.display();
+                    break;
+                case 3:
+                    cout << "Enter 'true' for hired. Or 'false' for fired. (without the commas): ";
+                    cin >> newStatus;
+                    if (newStatus == "true") {
+                        emp.hire();
+                    } else {
+                        emp.fire();
+                    }
+                    cout << "Updated hired status in employee record: " << endl;
+                    emp.display();
+                    break;
+                default:
+                    cerr << "Unknown command" << endl;
+                    break;
+            }
+    } catch (const std::logic_error& exception) {
+        cerr << "Unable to edit employee: " << exception.what() << endl;
+    }
+    
+    log("exited");
+}
