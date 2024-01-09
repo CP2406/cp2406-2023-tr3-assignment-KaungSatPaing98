@@ -181,3 +181,66 @@ void doPromote(Database& db)
     log("exited");
 }
 
+// Generate a new database
+Database generateNewDB(Database& db)
+{
+    log("entered");
+    Database dbNew;
+
+    // Read names from file into first, middle, last name vectors
+    string filename = "TwentyNames.txt";
+    vector<string> firstNameVec, middleNameVec, lastNameVec;
+    
+    // Open the file and check for failure.
+	ifstream inputFile{ filename.data() };
+	if (inputFile.fail())
+    {
+		throw invalid_argument{ "Unable to open file" };
+    }
+    
+    while (!inputFile.eof())
+    {
+        string line;
+		getline(inputFile, line);
+        // Skip empty lines if found
+		if (line.empty()) {
+			continue;
+		}
+		// Make a string stream and parse it
+		istringstream inLine { line };
+		string firstName, middleName, lastName;
+        // Names in the file are quoted so quoted() is needed to separate them
+        inLine >> quoted(firstName) >> quoted(middleName) >> quoted(lastName);
+		if (inLine.bad()) {
+			cerr << "Error reading person. Ignoring." << endl;
+			continue;
+		}
+        firstNameVec.push_back(firstName);
+        middleNameVec.push_back(middleName);
+        lastNameVec.push_back(lastName);
+    }
+
+    // Create 8000 random combinations of names and add to new database
+    int count = 0;
+    for (const string& firstName : firstNameVec){
+        for (const string& middleName : middleNameVec){
+            for (const string& lastName : lastNameVec){
+                count++;
+                // Addresses will all be unique by their street number
+                string streetName {"Greenfield St"};
+                string address = to_string(count) + " " + streetName;
+                // Add as an Employee and put into the Database
+                dbNew.addEmployee(firstName, middleName, lastName, address);
+            }
+        }
+    }
+
+    cout << "|-----------------------------------------------|" << endl;
+    cout << "| ~ Your New 8000 Employee Database Is Ready ~  |" << endl;
+    cout << "|-----------------------------------------------|" << endl;
+
+    log("exited");
+
+    // Return the new Database with 8000 employees 
+    return dbNew;
+}
