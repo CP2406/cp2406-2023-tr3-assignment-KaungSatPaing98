@@ -1,4 +1,4 @@
-// CP2406 Assignment - trimester 3 2023 - Kaung Sat Paing - 14399033
+// CP2406 Assignment - Kaung Sat Paing - 14399033
 #include <iostream>
 #include <stdexcept>
 #include <fstream>
