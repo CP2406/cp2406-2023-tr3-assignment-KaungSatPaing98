@@ -1,4 +1,4 @@
-// CP2406 Assignment - Kaung Sat Paing - 14399033
+// CP2406 Assignment - Trimester 3 2023 - Samuel Barrett - 13038579
 
 #include "Debugger.h"
 #include <iostream>
@@ -443,4 +443,3 @@ void searchEmployee(Database& db)
     
     log("exited");  
 }
-// is there somethings error in my jason file. So I run first in my local vs code and I put all the file on github. And then I run the code Finally is work!!
