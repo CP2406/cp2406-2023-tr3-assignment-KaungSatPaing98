@@ -1,3 +1,5 @@
+// CP2406 Assignment - Kaung Sat Paing - 14399033
+
 #pragma once
 
 #include <string>
@@ -9,7 +11,8 @@ namespace Records {
 	{
 	public:
 		Employee() = default;
-		Employee(const std::string& firstName, const std::string& lastName);
+		Employee(const std::string& firstName, const std::string& middleName,
+				 const std::string& lastName, const std::string& address);
 
 		void promote(int raiseAmount = 1000);
 		void demote(int demeritAmount = 1000);
@@ -21,8 +24,14 @@ namespace Records {
 		void setFirstName(const std::string& firstName);
 		const std::string& getFirstName() const;
 
+		void setMiddleName(const std::string& middleName);
+		const std::string& getMiddleName() const;
+
 		void setLastName(const std::string& lastName);
 		const std::string& getLastName() const;
+
+		void setAddress(const std::string& address);
+		const std::string& getAddress() const;
 
 		void setEmployeeNumber(int employeeNumber);
 		int getEmployeeNumber() const;
@@ -34,10 +43,11 @@ namespace Records {
 
 	private:
 		std::string mFirstName;
+		std::string mMiddleName;
 		std::string mLastName;
+		std::string mAddress;
 		int mEmployeeNumber = -1;
 		int mSalary = kDefaultStartingSalary;
 		bool mHired = false;
 	};
 }
-

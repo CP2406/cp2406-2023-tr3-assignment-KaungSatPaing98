@@ -1,3 +1,5 @@
+// CP2406 Assignment - Kaung Sat Paing - 14399033
+
 #include <iostream>
 #include "Database.h"
 
@@ -7,6 +9,8 @@ using namespace Records;
 int main()
 {
     Database myDB;
+
+    cout << "\nStarting DatabaseTest.cpp file for testing" << endl;
 
 	Employee& emp1 = myDB.addEmployee("Greg", "Wallis");
     emp1.fire();
@@ -20,12 +24,16 @@ int main()
     
 	cout << "all employees: " << endl << endl;
     myDB.displayAll();
-    
+
 	cout << endl << "current employees: " << endl << endl;
     myDB.displayCurrent();
     
 	cout << endl << "former employees: " << endl << endl;
     myDB.displayFormer();
+
+    // Test .promote() with custom amount
+    emp3.promote(500000);
+    myDB.displayAll();
     
 	return 0;
 }

@@ -1,3 +1,5 @@
+// CP2406 Assignment - Kaung Sat Paing - 14399033
+
 #include <iostream>
 #include "Employee.h"
 
@@ -10,7 +12,9 @@ int main()
 
 	Employee emp;
 	emp.setFirstName("John");
+	emp.setMiddleName("Martin");
 	emp.setLastName("Doe");
+	emp.setAddress("123 McFarlane St");
 	emp.setEmployeeNumber(71);
 	emp.setSalary(50000);
 	emp.promote();
