@@ -1,4 +1,4 @@
-// CP2406 Assignment - Trimester 3 2023 - Samuel Barrett - 13038579
+// CP2406 Assignment - Kaung Sat Paing - 14399033
 
 #include <iostream>
 #include "Employee.h"

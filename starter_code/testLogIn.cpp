@@ -1,4 +1,5 @@
 // LogIn and Sign-Up system
+// CP2406 Assignment - Kaung Sat Paing - 14399033
 
 #include <iostream>
 #include <stdexcept>
